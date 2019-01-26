@@ -1,0 +1,168 @@
+type Restaurant {
+  id: ID!
+  city: String!
+  name: String!
+  numRatings: Int
+  photo: String!
+  reviews(filter: ModelReviewFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelReviewConnection
+}
+
+type Review {
+  rating: Int!
+  text: String!
+  createdAt: String
+  restaurant: Restaurant!
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelRestaurantConnection {
+  items: [Restaurant]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelRestaurantFilterInput {
+  id: ModelIDFilterInput
+  city: ModelStringFilterInput
+  name: ModelStringFilterInput
+  numRatings: ModelIntFilterInput
+  photo: ModelStringFilterInput
+  and: [ModelRestaurantFilterInput]
+  or: [ModelRestaurantFilterInput]
+  not: ModelRestaurantFilterInput
+}
+
+type Query {
+  getRestaurant(id: ID!): Restaurant
+  listRestaurants(filter: ModelRestaurantFilterInput, limit: Int, nextToken: String): ModelRestaurantConnection
+  getReview(id: ID!): Review
+  listReviews(filter: ModelReviewFilterInput, limit: Int, nextToken: String): ModelReviewConnection
+}
+
+input CreateRestaurantInput {
+  id: ID
+  city: String!
+  name: String!
+  numRatings: Int
+  photo: String!
+}
+
+input UpdateRestaurantInput {
+  id: ID!
+  city: String
+  name: String
+  numRatings: Int
+  photo: String
+}
+
+input DeleteRestaurantInput {
+  id: ID
+}
+
+type Mutation {
+  createRestaurant(input: CreateRestaurantInput!): Restaurant
+  updateRestaurant(input: UpdateRestaurantInput!): Restaurant
+  deleteRestaurant(input: DeleteRestaurantInput!): Restaurant
+  createReview(input: CreateReviewInput!): Review
+  updateReview(input: UpdateReviewInput!): Review
+  deleteReview(input: DeleteReviewInput!): Review
+}
+
+type Subscription {
+  onCreateRestaurant: Restaurant @aws_subscribe(mutations: ["createRestaurant"])
+  onUpdateRestaurant: Restaurant @aws_subscribe(mutations: ["updateRestaurant"])
+  onDeleteRestaurant: Restaurant @aws_subscribe(mutations: ["deleteRestaurant"])
+  onCreateReview: Review @aws_subscribe(mutations: ["createReview"])
+  onUpdateReview: Review @aws_subscribe(mutations: ["updateReview"])
+  onDeleteReview: Review @aws_subscribe(mutations: ["deleteReview"])
+}
+
+type ModelReviewConnection {
+  items: [Review]
+  nextToken: String
+}
+
+input ModelReviewFilterInput {
+  rating: ModelIntFilterInput
+  text: ModelStringFilterInput
+  createdAt: ModelStringFilterInput
+  and: [ModelReviewFilterInput]
+  or: [ModelReviewFilterInput]
+  not: ModelReviewFilterInput
+}
+
+input CreateReviewInput {
+  rating: Int!
+  text: String!
+  createdAt: String
+  reviewRestaurantId: ID!
+}
+
+input UpdateReviewInput {
+  rating: Int
+  text: String
+  createdAt: String
+  reviewRestaurantId: ID
+}
+
+input DeleteReviewInput {
+  id: ID
+}

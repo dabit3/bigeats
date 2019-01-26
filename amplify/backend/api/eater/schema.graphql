@@ -1,0 +1,15 @@
+type Restaurant @model {
+  id: ID!
+  city: String!
+  name: String!
+  numRatings: Int
+  photo: String!
+  reviews: [Review] @connection(name: "RestaurantReview")
+}
+
+type Review @model {
+  rating: Int!
+  text: String!
+  createdAt: String
+  restaurant: Restaurant! @connection(name: "RestaurantReview")
+}
