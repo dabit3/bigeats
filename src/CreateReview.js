@@ -1,20 +1,33 @@
 import React from 'react'
 import { css } from 'glamor';
 
+import { API, graphqlOperation } from 'aws-amplify'
+
+import * as mutations from './graphql/mutations'
+
 const stars = [1, 2, 3, 4, 5]
 
-class CreateRestaurant extends React.Component {
+class CreateReview extends React.Component {
   state = {
     review: '', selectedIndex: null
   }
-  createRestaurant = () => {
-    if (this.state.city === '' || this.state.name === '' || this.state.photo === '') return
-    this.props.createRestaurant(this.state)
-    this.props.closeModal()
-  }
   onChange = ({ target }) => {
-    console.log('target: ', target)
     this.setState({ [target.name]: target.value })
+  }
+  createReview = async() => {
+    const { restaurant } = this.props
+    const input = {
+      text: this.state.review,
+      rating: this.state.selectedIndex + 1,
+      reviewRestaurantId: restaurant.id
+    }
+    try {
+      this.props.closeModal()
+      await API.graphql(graphqlOperation(mutations.createReview, {input}))
+      console.log('successfully created review')
+    } catch(err) {
+      console.log('error creating restaurant: ', err)
+    }
   }
   render() {
     const { selectedIndex } = this.state
@@ -26,6 +39,7 @@ class CreateRestaurant extends React.Component {
             {
               stars.map((s, i) => (
                 <p
+                  key={i}
                   onClick={() => this.setState({ selectedIndex: i })}
                   {...css([styles.star, selectedIndex === i && { backgroundColor: 'gold' }])}
                 >{s} star</p>
@@ -39,7 +53,7 @@ class CreateRestaurant extends React.Component {
             onChange={this.onChange}
           />
           <div
-            onClick={this.createRestaurant}
+            onClick={this.createReview}
             {...css(styles.button)}
           >
             <p
@@ -117,4 +131,4 @@ const styles = {
   }
 }
 
-export default CreateRestaurant
+export default CreateReview

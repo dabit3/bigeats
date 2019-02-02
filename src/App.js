@@ -7,23 +7,30 @@ import Header from './Header'
 import Restaurants from './Restaurants'
 import CreateRestaurant from './CreateRestaurant'
 import CreateReview from './CreateReview'
+import Reviews from './Reviews'
 import * as queries from './graphql/queries'
 import * as mutations from './graphql/mutations'
 
 class App extends Component {
   state = {
     restaurants: [],
+    selectedRestaurant: {},
     showCreateRestaurant: false,
-    showCreateReview: true
+    showCreateReview: false,
+    showReviews: false
   }
   async componentDidMount() {
     try {
       const rdata = await API.graphql(graphqlOperation(queries.listRestaurants))
       const { data: { listRestaurants: { items }}} = rdata
+      console.log('items: ', items)
       this.setState({ restaurants: items })
     } catch(err) {
       console.log('error: ', err)
     }
+  }
+  viewReviews = (r) => {
+    this.setState({ showReviews: true, selectedRestaurant: r })
   }
   createRestaurant = async(restaurant) => {
     this.setState({
@@ -38,15 +45,17 @@ class App extends Component {
   }
   closeModal = () => {
     this.setState({
-      showCreateRestaurant: false
+      showCreateRestaurant: false,
+      showCreateReview: false,
+      showReviews: false,
+      selectedRestaurant: {}
     })
   }
   showCreateRestaurant = () => {
     this.setState({ showCreateRestaurant: true })
   }
-  showCreateReview = (r) => {
-    this.setState({ showCreateReview: true })
-    console.log('')
+  showCreateReview = r => {
+    this.setState({ selectedRestaurant: r, showCreateReview: true })
   }
   render() {
     return (
@@ -55,6 +64,7 @@ class App extends Component {
         <Restaurants
           restaurants={this.state.restaurants}
           showCreateReview={this.showCreateReview}
+          viewReviews={this.viewReviews}
         />
         {
           this.state.showCreateRestaurant && (
@@ -69,6 +79,16 @@ class App extends Component {
             <CreateReview
               createReview={this.createReview}
               closeModal={this.closeModal}   
+              restaurant={this.state.selectedRestaurant}
+            />
+          )
+        }
+        {
+          this.state.showReviews && (
+            <Reviews
+              selectedRestaurant={this.state.selectedRestaurant}
+              closeModal={this.closeModal}
+              restaurant={this.state.selectedRestaurant}
             />
           )
         }

@@ -33,6 +33,10 @@ export const listRestaurants = `query ListRestaurants(
       photo
       reviews {
         nextToken
+        items {
+          rating
+          text
+        }
       }
     }
     nextToken

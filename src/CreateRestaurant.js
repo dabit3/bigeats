@@ -11,11 +11,9 @@ class CreateRestaurant extends React.Component {
     this.props.closeModal()
   }
   onChange = ({ target }) => {
-    console.log('target: ', target)
     this.setState({ [target.name]: target.value })
   }
   render() {
-    console.log('state:', this.state)
     const { closeModal } = this.props
     return (
       <div {...css(styles.overlay)}>
