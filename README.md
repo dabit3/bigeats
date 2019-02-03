@@ -30,7 +30,13 @@ yarn
 amplify init
 ```
 
-4. Start the app
+4. Create the resources in your account
+
+```sh
+amplify push
+```
+
+5. Start the app
 
 ```sh
 npm start
