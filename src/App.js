@@ -38,10 +38,16 @@ class App extends Component {
     })
     try {
       await API.graphql(graphqlOperation(mutations.createRestaurant, {input: restaurant}))
-      console.log('successfully created restaurant')
     } catch(err) {
       console.log('error creating restaurant: ', err)
     }
+  }
+  createReview = async(id, input) => {
+    const restaurants = this.state.restaurants
+    const index = restaurants.findIndex(r => r.id === id)
+    restaurants[index].reviews.items.push(input)
+    this.setState({ restaurants })
+    await API.graphql(graphqlOperation(mutations.createReview, {input}))
   }
   closeModal = () => {
     this.setState({

@@ -1,10 +1,6 @@
 import React from 'react'
 import { css } from 'glamor';
 
-import { API, graphqlOperation } from 'aws-amplify'
-
-import * as mutations from './graphql/mutations'
-
 const stars = [1, 2, 3, 4, 5]
 
 class CreateReview extends React.Component {
@@ -22,9 +18,8 @@ class CreateReview extends React.Component {
       reviewRestaurantId: restaurant.id
     }
     try {
+      this.props.createReview(restaurant.id, input)
       this.props.closeModal()
-      await API.graphql(graphqlOperation(mutations.createReview, {input}))
-      console.log('successfully created review')
     } catch(err) {
       console.log('error creating restaurant: ', err)
     }

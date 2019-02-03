@@ -4,14 +4,13 @@ import { css } from 'glamor'
 class Reviews extends React.Component {
   render() {
     const { closeModal, restaurant } = this.props
-    console.log('restaurant: ', restaurant)
     return (
       <div {...css(styles.overlay)}>
         <div {...css(styles.container)}>
           <h1>{restaurant.name}</h1>
           {
             restaurant.reviews.items.map((r, i) => (
-              <div {...css(styles.review)}>
+              <div {...css(styles.review)} key={i}>
                 <p {...css(styles.text)}>{r.text}</p>
                 <p {...css(styles.rating)}>Stars: {r.rating}</p>
               </div>
@@ -27,7 +26,7 @@ class Reviews extends React.Component {
 const styles = {
   text: {
     fontWeight: '500',
-    fontSize: 22,
+    fontSize: 18,
     marginBottom: 5
   },
   rating: {
