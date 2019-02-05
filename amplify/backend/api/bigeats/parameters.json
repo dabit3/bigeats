@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "bigeats",
+    "schemaGraphql": "s3://bigeats-20190205121442-deployment/amplify-appsync-files/schema.graphql.1549397882955",
+    "ResolverBucket": "bigeats-20190205121442-deployment",
+    "ResolverRootKey": "amplify-appsync-files",
+    "DeploymentTimestamp": "1549397882955"
+}

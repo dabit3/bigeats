@@ -1,6 +1,6 @@
 {
 	"api": {
-		"eater": {
+		"bigeats": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {

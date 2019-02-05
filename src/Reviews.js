@@ -4,6 +4,7 @@ import { css } from 'glamor'
 class Reviews extends React.Component {
   render() {
     const { closeModal, restaurant } = this.props
+    console.log('restaurant:', restaurant)
     return (
       <div {...css(styles.overlay)}>
         <div {...css(styles.container)}>

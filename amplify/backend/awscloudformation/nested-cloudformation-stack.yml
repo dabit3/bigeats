@@ -78,16 +78,16 @@
 				}
 			}
 		},
-		"apieater": {
+		"apibigeats": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/eater-20190125144727-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/bigeats-20190205121442-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
-					"AppSyncApiName": "eater",
-					"schemaGraphql": "s3://eater-20190125144727-deployment/amplify-appsync-files/schema.graphql.1548456819419",
-					"ResolverBucket": "eater-20190125144727-deployment",
+					"AppSyncApiName": "bigeats",
+					"schemaGraphql": "s3://bigeats-20190205121442-deployment/amplify-appsync-files/schema.graphql.1549397882955",
+					"ResolverBucket": "bigeats-20190205121442-deployment",
 					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1548456819419",
+					"DeploymentTimestamp": "1549397882955",
 					"env": "master"
 				}
 			}

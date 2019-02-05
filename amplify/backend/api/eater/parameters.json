@@ -1,7 +1,0 @@
-{
-    "AppSyncApiName": "eater",
-    "schemaGraphql": "s3://eater-20190125144727-deployment/amplify-appsync-files/schema.graphql.1548456819419",
-    "ResolverBucket": "eater-20190125144727-deployment",
-    "ResolverRootKey": "amplify-appsync-files",
-    "DeploymentTimestamp": "1548456819419"
-}

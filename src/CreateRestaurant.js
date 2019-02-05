@@ -3,7 +3,7 @@ import { css } from 'glamor';
 
 class CreateRestaurant extends React.Component {
   state = {
-    name: '', city: '', photo: ''
+    name: '', city: '', photo: '', reviews: { items: [] }
   }
   createRestaurant = () => {
     if (this.state.city === '' || this.state.name === '' || this.state.photo === '') return

@@ -6,7 +6,6 @@ type Restaurant @model {
   photo: String!
   reviews: [Review] @connection(name: "RestaurantReview")
 }
-
 type Review @model {
   rating: Int!
   text: String!
