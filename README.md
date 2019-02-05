@@ -1,4 +1,4 @@
-# Eater
+# BigEats
 
 Restaurant Review app built with React, GraphQL & AWS AppSync.
 
