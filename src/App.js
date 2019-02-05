@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
-
 import { API, graphqlOperation } from 'aws-amplify'
 
 import Header from './Header'
@@ -37,7 +35,10 @@ class App extends Component {
       restaurants: [...this.state.restaurants, restaurant]
     })
     try {
-      await API.graphql(graphqlOperation(mutations.createRestaurant, {input: restaurant}))
+      await API.graphql(graphqlOperation(
+        mutations.createRestaurant,
+        {input: restaurant}
+      ))
     } catch(err) {
       console.log('error creating restaurant: ', err)
     }

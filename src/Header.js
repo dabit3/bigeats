@@ -3,7 +3,7 @@ import { css } from 'glamor'
 
 const Header = ({ showCreateRestaurant }) => (
   <div {...css(styles.header)}>
-    <p {...css(styles.title)}>Eater</p>
+    <p {...css(styles.title)}>BigEats</p>
     <div {...css(styles.iconContainer)}>
       <p {...css(styles.icon)} onClick={showCreateRestaurant}>+</p>
     </div>
